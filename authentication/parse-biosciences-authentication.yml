@@ -1,0 +1,116 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  https://app.trailmaker.parsebiosciences.com/landing (the __NEXT_DATA__ amplifyConfig block
+  Parse Biosciences serves in its own application shell) plus the resulting Cognito OIDC
+  discovery document at
+  https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_eYTCV3Nl7/.well-known/openid-configuration
+  and a 401 observed on https://api.app.trailmaker.parsebiosciences.com/v2/experiments/examples
+docs: null
+
+summary: >-
+  Parse Biosciences publishes no developer API and therefore no developer authentication
+  documentation. It does operate one authenticated HTTP surface: the backend of Trailmaker,
+  its cloud single-cell data-analysis application. That backend is protected by AWS Cognito
+  (OIDC) and requires a bearer token; there is no public reference, no key-issuance flow, and
+  no published contract for it. Everything below was observed anonymously — no credentials
+  were used and no access control was defeated.
+
+public_developer_api: false
+public_auth_documentation: false
+
+surfaces:
+  - name: Trailmaker application backend
+    base_url: https://api.app.trailmaker.parsebiosciences.com
+    human_url: https://www.parsebiosciences.com/data-analysis/
+    status: live
+    audience: >-
+      First-party — this is the API the Trailmaker web client calls. It is not marketed,
+      documented, or offered to third-party developers.
+    evidence:
+      - url: https://api.app.trailmaker.parsebiosciences.com/v2/experiments/examples
+        http_status: 401
+        content_type: application/json; charset=utf-8
+        body: '{"message":"The request does not contain an authentication token."}'
+      - url: https://api.app.trailmaker.parsebiosciences.com/v2/openapi.json
+        http_status: 404
+        body: '{"message":"not found"}'
+    observed_headers:
+      - x-powered-by: Express
+      - strict-transport-security: max-age=31536000; includeSubDomains
+      - access-control-allow-credentials: 'true'
+      - access-control-expose-headers: X-Amzn-Trace-Id
+      - vary: Origin
+
+security_schemes:
+  - id: cognito_oidc
+    type: openIdConnect
+    scheme: bearer
+    bearer_format: JWT
+    in: header
+    header: Authorization
+    description: >-
+      Amazon Cognito user pool eu-west-1_eYTCV3Nl7 in eu-west-1, web client
+      665t39tl77h7q94f6ssvojmh77, authentication flow USER_SRP_AUTH. The application also
+      carries an unauthenticated Cognito identity pool
+      (eu-west-1:da43db0f-f5db-4276-a15b-614d606585e8) for pre-sign-in AWS calls.
+    openid_connect_url: >-
+      https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_eYTCV3Nl7/.well-known/openid-configuration
+    issuer: https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_eYTCV3Nl7
+    authorization_endpoint: >-
+      https://biomage-auth-production-242905224710.auth.eu-west-1.amazoncognito.com/oauth2/authorize
+    token_endpoint: >-
+      https://biomage-auth-production-242905224710.auth.eu-west-1.amazoncognito.com/oauth2/token
+    userinfo_endpoint: >-
+      https://biomage-auth-production-242905224710.auth.eu-west-1.amazoncognito.com/oauth2/userInfo
+    revocation_endpoint: >-
+      https://biomage-auth-production-242905224710.auth.eu-west-1.amazoncognito.com/oauth2/revoke
+    end_session_endpoint: >-
+      https://biomage-auth-production-242905224710.auth.eu-west-1.amazoncognito.com/logout
+    jwks_uri: >-
+      https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_eYTCV3Nl7/.well-known/jwks.json
+    response_types_supported: [code, token]
+    grant_types: [authorization_code]
+    id_token_signing_alg_values_supported: [RS256]
+    token_endpoint_auth_methods_supported: [client_secret_basic, client_secret_post]
+    scopes_supported:
+      - openid
+      - email
+      - phone
+      - profile
+    scopes_requested_by_trailmaker:
+      - aws.cognito.signin.user.admin
+      - email
+      - openid
+      - phone
+      - profile
+    redirect_sign_in: https://app.trailmaker.parsebiosciences.com/redirect
+    redirect_sign_out: https://app.trailmaker.parsebiosciences.com/landing/
+    saved_document: well-known/parse-biosciences-trailmaker-openid-configuration.json
+
+api_keys: none_published
+oauth_client_registration: none_published
+mtls: false
+
+user_facing_credentials:
+  - name: Trailmaker upload token
+    description: >-
+      Parse's Support Suite documents a command-line FASTQ upload path in which the user
+      downloads a "parse-upload" Python script from Trailmaker, generates a token in the
+      Trailmaker UI, and pastes the generated command into a console. The token is generated
+      per-session inside the signed-in application; neither the script nor a token format is
+      published at a public URL, and no token values are recorded here.
+    source: >-
+      https://support.parsebiosciences.com/hc/en-us/articles/27076682137236-Trailmaker-User-Guide
+    public: false
+
+notes:
+  - >-
+    Trailmaker is a deployment of the open-source Cellenics/Biomage single-cell platform
+    (github.com/hms-dbmi-cellenics). The evidence is in Parse's own served config: the Cognito
+    hosted-UI domain is literally biomage-auth-production-242905224710, analytics point at
+    biomage.matomo.cloud, and the Trailmaker course site is biomage-s-site.thinkific.com. The
+    upstream project publishes an OpenAPI for this API — but that spec belongs to Cellenics
+    (info.title "API", contact.name "Cellenics", MIT, servers "/v2", hosted in the HMS DBMI
+    org), not to Parse Biosciences, so it is deliberately NOT harvested into this repo. See
+    the ownership note in conventions/parse-biosciences-conventions.yml.

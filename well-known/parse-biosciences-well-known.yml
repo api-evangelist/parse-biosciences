@@ -1,0 +1,145 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Direct unauthenticated HTTP probes of every Parse Biosciences host discovered during
+  enrichment (marketing site, Zendesk support suite, the Trailmaker single-page app and
+  its backing API host), 2026-08-26.
+
+summary:
+  hosts_probed: 5
+  documents_served: 0
+  note: >-
+    Parse Biosciences serves no /.well-known/ document from any host it controls. Every
+    path returned 404 with an HTML body. NO WellKnown or SecurityTxt pointer is emitted in
+    apis.yml, because this file records an absence, not a presence. The one OpenID
+    Connect discovery document reachable for the Trailmaker platform is served by AWS
+    Cognito (cognito-idp.eu-west-1.amazonaws.com), not by a Parse host — it is recorded
+    below and in authentication/ for completeness, and it is deliberately NOT counted as a
+    Parse-served well-known document.
+
+hosts:
+  - host: www.parsebiosciences.com
+    note: WordPress (WP Engine) marketing site. Apex parsebiosciences.com 301s here.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+
+  - host: support.parsebiosciences.com
+    note: >-
+      Zendesk Help Center ("Support Suite"). Fronted by Cloudflare, which answered our
+      crawler with a 403 JS interstitial ("Just a moment...") on every path including the
+      well-known probes; the pages themselves are public and indexed, so this is a bot
+      challenge against us, not a missing document.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+
+  - host: app.trailmaker.parsebiosciences.com
+    note: >-
+      Trailmaker single-page application (Next.js, Express in front). GET / 307s to
+      /landing. robots.txt is served (200) and allows everything.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+
+  - host: api.app.trailmaker.parsebiosciences.com
+    note: >-
+      Live Trailmaker application backend (Express). Real API endpoints under /v2/ answer
+      401 JSON; every discovery path 404s.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+
+  - host: trailmaker.parsebiosciences.com
+    note: >-
+      Resolves to AWS S3 addresses (3.5.x / 52.92.x) but never completed a TLS
+      connection — every probe timed out at 8-12s on a single attempt and was not retried.
+      The live application host is app.trailmaker.parsebiosciences.com.
+    documents:
+      - path: /.well-known/security.txt
+        status: null
+        file: null
+        note: 'status: <no response> — connection timed out, one attempt, not retried'
+      - path: /.well-known/agent-card.json
+        status: null
+        file: null
+        note: 'status: <no response> — connection timed out, one attempt, not retried'
+
+  - host: cognito-idp.eu-west-1.amazonaws.com
+    third_party: true
+    note: >-
+      AWS-operated host, NOT a Parse Biosciences host. Carries the OIDC discovery document
+      for the Cognito user pool eu-west-1_eYTCV3Nl7 that Trailmaker's own published app
+      config names. Saved for the authentication profile; it earns Parse no WellKnown
+      credit.
+    documents:
+      - path: /eu-west-1_eYTCV3Nl7/.well-known/openid-configuration
+        status: 200
+        file: parse-biosciences-trailmaker-openid-configuration.json

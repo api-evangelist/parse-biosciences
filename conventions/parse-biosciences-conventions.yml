@@ -1,0 +1,123 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Anonymous observation of https://api.app.trailmaker.parsebiosciences.com and
+  https://app.trailmaker.parsebiosciences.com on 2026-08-26, plus the Parse Biosciences
+  Support Suite. Nothing here is derived from a contract, because Parse publishes none.
+
+summary: >-
+  Parse Biosciences publishes no API reference, so it publishes no API conventions. This file
+  records what is observable from outside the product, and it records the ownership finding
+  that stopped an upstream open-source contract from being attributed to Parse.
+
+auth_style:
+  scheme: bearer (JWT) via AWS Cognito OIDC
+  documented_publicly: false
+  detail: authentication/parse-biosciences-authentication.yml
+
+versioning:
+  style: path prefix
+  observed: /v2/ on api.app.trailmaker.parsebiosciences.com
+  policy_published: false
+  note: >-
+    The /v2 prefix is observable in the application's own JavaScript bundle and in live 401
+    responses. No versioning policy, no deprecation policy, and no version negotiation are
+    documented anywhere public.
+
+error_envelope:
+  format: bare JSON object
+  shape: '{"message": "<string>"}'
+  problem_json: false
+  examples:
+    - status: 401
+      body: '{"message":"The request does not contain an authentication token."}'
+    - status: 404
+      body: '{"message":"not found"}'
+  documented_publicly: false
+
+pagination:
+  documented: false
+  style: unknown
+
+idempotency:
+  supported: unknown
+  documented: false
+  header: null
+  note: >-
+    No idempotency header, scope, or retention policy is documented. No `Idempotency` pointer
+    is emitted in apis.yml, because asserting one would credit Parse with a guarantee it has
+    never published.
+
+rate_limit_signaling:
+  headers_observed: []
+  documented: false
+  note: >-
+    No X-RateLimit-*, RateLimit-*, or Retry-After header was returned on the anonymous 401
+    and 404 responses observed.
+
+request_id_tracing:
+  supported: partial
+  note: >-
+    The API returns `access-control-expose-headers: X-Amzn-Trace-Id`, an AWS load-balancer
+    trace identifier exposed to the browser client. It is infrastructure behaviour, not a
+    documented correlation-ID convention.
+
+metadata: {}
+field_expansion: {}
+
+dry_run_mode:
+  supported: na
+  reason: No public write surface and no public contract.
+
+reversibility:
+  grade: na
+  reason: >-
+    Parse Biosciences exposes no public write surface. Trailmaker is an authenticated
+    end-user application; there is no documented programmatic action for an agent to take,
+    and therefore no reversal operation and no reversal window to record. `reversibility`,
+    `dry_run_mode` and `idempotency` are all `na` here for the same reason, and an honest
+    `na` leaves the denominator rather than scoring zero.
+  write_surfaces: []
+  reversal_operations: []
+  windows: []
+  note: >-
+    No reversal window is asserted. The Trailmaker UI does let a signed-in user delete
+    projects and samples, but no window is stated in any public document, so none is recorded.
+
+ownership_finding:
+  title: Trailmaker is a Cellenics deployment — the upstream OpenAPI is NOT Parse's contract
+  what_we_found: >-
+    Trailmaker is a deployment of the open-source Cellenics single-cell platform maintained at
+    github.com/hms-dbmi-cellenics (formerly Biomage Ltd, github.com/biomage-org). Parse's own
+    served application config gives it away: the Cognito hosted-UI domain is
+    biomage-auth-production-242905224710.auth.eu-west-1.amazoncognito.com, analytics point at
+    biomage.matomo.cloud, the Trailmaker course site is biomage-s-site.thinkific.com, and the
+    Redux store shipped in /landing matches the Cellenics UI store key-for-key (with a
+    Parse-specific `parseExperimentType` field added).
+  the_upstream_spec: >-
+    hms-dbmi-cellenics/api publishes src/specs/api.v2.yaml — a real OpenAPI 3.0.0 describing
+    exactly the /v2 routes Parse's backend serves (/v2/experiments, /v2/workRequest,
+    /v2/access, /v2/secondaryAnalysis and the rest, all of which appear in Trailmaker's own
+    bundle).
+  why_it_was_not_saved: >-
+    It fails the STEP 0c ownership check. The spec says about itself: info.title "API",
+    info.description "The main Node.js pipeline API.", contact.name "Cellenics", license MIT
+    pointing at github.com/hms-dbmi-cellenics/api/blob/master/LICENSE, servers "/v2". It is
+    hosted in a third party's repository and names a third party as its owner. Saving it into
+    openapi/ would credit Parse Biosciences with publishing a contract it did not publish and
+    does not maintain, and every derived artifact would inherit that wrong provenance. The
+    honest record is "no published contract found".
+  evidence:
+    - url: https://app.trailmaker.parsebiosciences.com/landing
+      status: 200
+    - url: https://raw.githubusercontent.com/hms-dbmi-cellenics/api/master/src/specs/api.v2.yaml
+      status: 200
+    - url: https://api.app.trailmaker.parsebiosciences.com/v2/experiments/examples
+      status: 401
+
+cross_links:
+  authentication: authentication/parse-biosciences-authentication.yml
+  conformance: conformance/parse-biosciences-conformance.yml
+  lifecycle: lifecycle/parse-biosciences-lifecycle.yml
+  rate_limits: rate-limits/parse-biosciences-rate-limits.yml
+  well_known: well-known/parse-biosciences-well-known.yml

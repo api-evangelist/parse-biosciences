@@ -1,0 +1,57 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  Registry metadata endpoints queried unauthenticated on 2026-08-26 — registry.npmjs.org,
+  pypi.org/pypi/<pkg>/json — plus the GitHub organizations github.com/parse-biosciences and
+  github.com/splitbio and the Parse Biosciences Support Suite.
+
+package_count: 0
+official_sdk_count: 0
+packages: []
+
+registries_searched:
+  - registry: pypi
+    queries: [parse-upload, parsebio, parse-biosciences, spipe, split-pipe, trailmaker]
+    hits: 0
+    note: every query returned 404
+  - registry: npm
+    queries: [trailmaker, parsebio, '@parsebio/sdk']
+    hits: 0
+    note: every query returned 404
+  - registry: github
+    orgs:
+      - org: parse-biosciences
+        public_repos: 0
+        created: '2022-07-01'
+        url: https://github.com/parse-biosciences
+      - org: splitbio
+        public_repos: 1
+        created: '2019-07-16'
+        url: https://github.com/splitbio
+        note: >-
+          The single public repository is a 2020 fork of scanpy, not a Parse client library.
+          splitbio is the pre-rename Split Biosciences org; its GitHub display name is
+          "Parse Biosciences".
+
+unpublished_tooling:
+  - name: parse-upload
+    kind: python script
+    registry: null
+    version: null
+    published: null
+    official: true
+    distribution: >-
+      Downloaded from inside the signed-in Trailmaker application, not from a package
+      registry or a public URL. Parse's Support Suite documents the flow — download the
+      script, generate a token in Trailmaker, paste the printed command, point it at your
+      FASTQ directory — but publishes no artifact a machine can fetch and no version.
+    source: >-
+      https://support.parsebiosciences.com/hc/en-us/articles/27076682137236-Trailmaker-User-Guide
+    note: >-
+      version/published are null because there is nothing to read: no registry entry, no
+      pinned URL, no release page. Checked, nothing to record — not "not checked". A
+      consumer cannot tell what version they are running either, which is the finding.
+
+note: >-
+  Parse Biosciences ships no client SDK in any public package registry. No `SDKs` pointer is
+  emitted in apis.yml, because sdk_count would be crediting a library that does not exist.

@@ -1,0 +1,33 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  DNS and HTTP probes for an MCP endpoint on every Parse Biosciences host, plus a web search
+  for a published Parse/Trailmaker MCP server, 2026-08-26.
+
+status: none
+tool_count: 0
+tools: []
+
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: probed
+
+evidence:
+  - probe: mcp.parsebiosciences.com
+    result: does not resolve in DNS
+  - probe: 'POST https://api.app.trailmaker.parsebiosciences.com/mcp'
+    result: '404 — "Cannot POST /mcp"'
+  - probe: 'GET https://app.trailmaker.parsebiosciences.com/mcp'
+    result: 404
+  - probe: npm / PyPI search for a Parse or Trailmaker MCP package
+    result: no package found
+
+note: >-
+  Parse Biosciences ships no MCP server, remote or local-stdio. No candidate tool list is
+  derived, because there is no OpenAPI in this repo to derive one from — the company publishes
+  no machine-readable contract. No `MCPServer` pointer is emitted in apis.yml; emitting one
+  would read as a verified agent surface where none exists.

@@ -1,0 +1,19 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://www.parsebiosciences.com/ and https://support.parsebiosciences.com/hc/en-us searched
+  for published limits; live anonymous responses from
+  https://api.app.trailmaker.parsebiosciences.com inspected for rate-limit headers, 2026-08-26.
+
+limit_count: 0
+limits: []
+
+response_headers: []
+exhaustion_status: null
+retry_after: false
+
+note: >-
+  Parse Biosciences documents no rate limits, because it documents no API. The Trailmaker
+  backend returned no X-RateLimit-*, RateLimit-*, or Retry-After header on the anonymous 401
+  and 404 responses observed, and its behaviour under load cannot be measured without
+  credentials. This is an honest zero: nothing published, nothing observed.

@@ -1,0 +1,59 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://www.parsebiosciences.com/ (sitemap_index.xml walked), the Support Suite at
+  https://support.parsebiosciences.com/hc/en-us, and DNS/HTTP probes for a status host,
+  2026-08-26.
+
+summary: >-
+  Parse Biosciences publishes no API lifecycle surface: no status page, no changelog, no
+  deprecation or versioning policy, and no SLA. Product release news is announced as press
+  releases and blog posts, not as dated release notes against a versioned interface.
+
+status_page:
+  present: false
+  url: null
+  evidence:
+    - status.parsebiosciences.com does not resolve in DNS
+    - status.trailmaker.parsebiosciences.com does not resolve in DNS
+    - No statuspage.io / status.io / instatus link appears anywhere on parsebiosciences.com
+  note: No `StatusPage` pointer is emitted in apis.yml.
+
+changelog:
+  present: false
+  url: null
+  evidence:
+    - 'https://www.parsebiosciences.com/changelog/ -> 404'
+    - >-
+      The nearest published surface is https://www.parsebiosciences.com/news/ (press
+      releases) and https://www.parsebiosciences.com/blog/, neither of which is a dated
+      change log against an interface.
+  note: No `ChangeLog` pointer is emitted in apis.yml.
+
+versioning_policy:
+  published: false
+  observed_scheme: path prefix (/v2) on the undocumented Trailmaker backend
+  note: Observed, not documented. See conventions/parse-biosciences-conventions.yml.
+
+deprecation_policy:
+  published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  note: No `Deprecation` pointer is emitted in apis.yml.
+
+sla:
+  published: false
+  url: null
+
+support:
+  channel: Zendesk Help Center
+  url: https://support.parsebiosciences.com/hc/en-us
+  status: 403
+  note: >-
+    Cloudflare answered our crawler with a JS interstitial ("Just a moment...") on every
+    request. The Help Center is public and search-indexed, so the pointer is treated as live
+    — the challenge is aimed at automated clients, not at readers.
+  contact: https://www.parsebiosciences.com/contact/
+
+deprecated_operations: []

@@ -1,8 +1,19 @@
 aid: parse-biosciences
 name: Parse Biosciences
-description: 'Parse Biosciences is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Parse Biosciences is a Seattle-based life-sciences company that makes Evercode, a
+  split-pool combinatorial barcoding chemistry for single cell and single nuclei RNA
+  sequencing that runs on standard lab equipment rather than a dedicated microfluidics
+  instrument. Its product line spans Evercode WT Mini, WT, WT Mega and WT Penta whole
+  transcriptome kits, Evercode TCR and BCR immune profiling, Evercode Fixation, Evercode
+  WT FFPE, Gene Select and CRISPR Detect, alongside a GigaLab sequencing service for
+  10M+ cell projects. Data analysis is delivered through Trailmaker, a cloud application
+  that takes Evercode FASTQ files through a pipeline and into interactive downstream
+  analysis. Parse publishes no public developer API, SDK, or machine-readable API
+  contract; Trailmaker is an end-user web application whose backend is authenticated with
+  AWS Cognito and undocumented outside the product.
 url: https://raw.githubusercontent.com/api-evangelist/parse-biosciences/refs/heads/main/apis.yml
+image: https://www.parsebiosciences.com/wp-content/uploads/2024/02/parsebio-home.png
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
@@ -12,6 +23,15 @@ created: '2026-08-26'
 modified: '2026-08-26'
 tags:
 - Company
+- Biotechnology
+- Life Sciences
+- Genomics
+- Single Cell Sequencing
+- Bioinformatics
+- Scientific Software
+- Data Analysis
+- Laboratory
+- Research
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -20,4 +40,56 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/parse-biosciences_stock/
+  url: https://www.parsebiosciences.com/
+- type: Blog
+  url: https://www.parsebiosciences.com/blog/
+- type: Support
+  url: https://support.parsebiosciences.com/hc/en-us
+- type: Login
+  url: https://app.trailmaker.parsebiosciences.com/
+- type: TermsOfService
+  url: https://www.parsebiosciences.com/legal/terms-of-service/
+- type: PrivacyPolicy
+  url: https://www.parsebiosciences.com/legal/privacy-policy/
+- type: GitHubOrganization
+  url: https://github.com/parse-biosciences
+- type: Conformance
+  url: conformance/parse-biosciences-conformance.yml
+- type: Conventions
+  url: conventions/parse-biosciences-conventions.yml
+- type: Lifecycle
+  url: lifecycle/parse-biosciences-lifecycle.yml
+- type: Packages
+  url: packages/parse-biosciences-packages.yml
+- type: Plans
+  url: plans/parse-biosciences-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/parse-biosciences-rate-limits.yml
+- type: LLMsTxt
+  url: llms/parse-biosciences-llms.txt
+- type: DomainSecurity
+  url: security/parse-biosciences-domain-security.yml
+x-enrichment:
+  date: '2026-08-26'
+  status: minimal
+  artifacts_added: 12
+  pass: local-v1
+x-coverage:
+  state: gated
+  reason: customer-only-docs
+  detail: >-
+    Trailmaker's backend at api.app.trailmaker.parsebiosciences.com is live and answers every
+    anonymous route with 401 "The request does not contain an authentication token.", and the
+    only documentation Parse publishes for it is a Zendesk Help Center of end-user guides that
+    assume a signed-in Trailmaker tenant — there is no public API reference, no spec at any
+    discovery path, and the FASTQ upload token is minted inside the signed-in app.
+  evidence:
+    - url: https://api.app.trailmaker.parsebiosciences.com/v2/experiments/examples
+      status: 401
+    - url: https://api.app.trailmaker.parsebiosciences.com/v2/openapi.json
+      status: 404
+    - url: https://app.trailmaker.parsebiosciences.com/openapi.json
+      status: 404
+    - url: https://support.parsebiosciences.com/hc/en-us
+      status: 403
+  checked: '2026-08-26'
