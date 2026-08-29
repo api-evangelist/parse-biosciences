@@ -13,6 +13,8 @@ description: >-
   contract; Trailmaker is an end-user web application whose backend is authenticated with
   AWS Cognito and undocumented outside the product.
 url: https://raw.githubusercontent.com/api-evangelist/parse-biosciences/refs/heads/main/apis.yml
+x-api-posture: no-product-api
+x-api-posture-basis: observed
 deliveryModel:
   model: saas
   open_source: false
