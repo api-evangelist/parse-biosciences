@@ -1,0 +1,14 @@
+{
+  "repo": "parse-biosciences",
+  "feeds": [
+    {
+      "source": "https://www.parsebiosciences.com/",
+      "feed_url": "https://www.parsebiosciences.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-30T22:33:40Z"
+}
