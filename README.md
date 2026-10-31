@@ -64,5 +64,97 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Parse Biosciences is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/parse-biosciences_stock/
+Parse Biosciences is a Seattle-based life-sciences company that makes Evercode, a split-pool combinatorial barcoding chemistry for single cell and single nuclei RNA sequencing that runs on standard lab equipment rather than a dedicated microfluidics instrument. Its product line spans Evercode WT Mini, WT, WT Mega and WT Penta whole transcriptome kits, Evercode TCR and BCR immune profiling, Evercode Fixation, Evercode WT FFPE, Gene Select and CRISPR Detect, alongside a GigaLab sequencing service for 10M+ cell projects. Data analysis is delivered through Trailmaker, a cloud application that takes Evercode FASTQ files through a pipeline and into interactive downstream analysis. Parse publishes no public developer API, SDK, or machine-readable API contract; Trailmaker is an end-user web application whose backend is authenticated with AWS Cognito and undocumented outside the product.
+
+**Areas:** Company · Biotechnology · Life Sciences · Genomics · Single-Cell Sequencing · Bioinformatics · Scientific Software · Data Analysis · Laboratory · Research
+
+## Parse Biosciences on APIs.io
+
+Everything profiled for Parse Biosciences is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/parse-biosciences/](https://apis.io/providers/parse-biosciences/)** — or go straight to one of the APIs or properties below.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Parse Biosciences Authentication](https://apis.io/security/parse-biosciences/parse-biosciences-authentication/)
+- [Parse Biosciences Domain Security](https://apis.io/security/parse-biosciences/parse-biosciences-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Parse Biosciences Plans Pricing](https://apis.io/plans/parse-biosciences/parse-biosciences-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Parse Biosciences Rate Limits](https://apis.io/rate-limits/parse-biosciences/parse-biosciences-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.parsebiosciences.com/)
+- [Support](https://support.parsebiosciences.com/hc/en-us)
+- [Blog](https://www.parsebiosciences.com/blog/)
+- [Terms of service](https://www.parsebiosciences.com/legal/terms-of-service/)
+- [Privacy policy](https://www.parsebiosciences.com/legal/privacy-policy/)
+- [GitHub](https://github.com/parse-biosciences)
+
+## API Evangelist rating
+
+**Kin Score 15.4** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 7.1 |
+| Access clarity | 27.6 |
+
+**Agent readiness 9.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 19.5** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/parse-biosciences/](https://apis.io/providers/parse-biosciences/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Parse Biosciences: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/parse-biosciences/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
